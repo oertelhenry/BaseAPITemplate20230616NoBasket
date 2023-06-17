@@ -36,6 +36,9 @@ namespace API.Extensions
                 c.AddSecurityRequirement(securityRequirement);
                 
             });
+
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2VVhhQlFaclhJXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxRdkFhX35ccXBURmdVU0Y=");
+
             return services;
         }
 

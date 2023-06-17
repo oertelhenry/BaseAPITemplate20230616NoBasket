@@ -17,9 +17,9 @@ namespace API.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
-        private readonly ILogger<PaymentsController> _logger;
+        private readonly ILogger<AccountController> _logger;
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            ITokenService tokenService, IMapper mapper, ILogger<PaymentsController> logger)
+            ITokenService tokenService, IMapper mapper, ILogger<AccountController> logger)
         {
             _mapper = mapper;
             _tokenService = tokenService;
@@ -43,7 +43,7 @@ namespace API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        public async Task<ActionResult<UserDto>> Login(LogonDto loginDto)
         {
             _logger.LogInformation($"(HenTest)");
             var user = await _userManager.FindByEmailAsync(loginDto.Email);

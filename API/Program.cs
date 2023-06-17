@@ -1,6 +1,8 @@
+using API.Domain;
 using API.Extensions;
 using API.Middleware;
 using Core.Entities.Identity;
+using Data.Extensions;
 using Infrastructue.Data;
 using Infrastructure.Data;
 using Infrastructure.Data.Identity;
@@ -20,6 +22,8 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddProviderServices(builder.Configuration);
+builder.Services.AddDomainServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddSwaggerDocumentation();
 

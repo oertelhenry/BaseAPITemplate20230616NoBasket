@@ -1,9 +1,17 @@
-﻿using System.Linq.Expressions;
+﻿using Domain.Odyssey.Entities.Documents;
+using System.Linq.Expressions;
 
 namespace Mobalyz.Data
 {
     public interface IDataRepository
     {
+        Task<IEnumerable<PdfTemplate>> GetPdfTemplateList(string UserName);
+        Task<IEnumerable<HtmlMailTemplate>> GetMailTemplateList(string UserName);
+        Task<PdfTemplate> GetPdfTemplateById(int templateId);
+        Task<HtmlMailTemplate> GetMailTemplateById(int templateId);
+        Task<bool> VerifyTemplateExist(string templateName);
+
+
         void DetachEnity<TEntity>(TEntity entity)
             where TEntity : class, IEntity;
 

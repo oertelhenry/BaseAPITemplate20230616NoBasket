@@ -1,5 +1,6 @@
 using API.Errors;
 using Core.Interfaces;
+using Data.Networking;
 using Infrastructue.Data;
 using Infrastructure.Data;
 using Infrastructure.Services;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Mobalyz.Data;
+using Mobalyz.Odyssey;
 using StackExchange.Redis;
 
 namespace API.Extensions
@@ -52,6 +54,9 @@ namespace API.Extensions
                     return new BadRequestObjectResult(errorResponse);
                 };
             });
+
+            services.Configure<ResourceSettings>(config.GetSection("Api"));
+            ResourceSettingsAccessor.Bind(config);
 
             services.AddCors(opt =>
             {

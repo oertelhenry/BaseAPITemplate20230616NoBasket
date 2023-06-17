@@ -3,17 +3,102 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Infrastructue.Data;
 using mobalyz.ErrorHandling;
+using Domain.Odyssey.Entities.Documents;
+using Mobalyz.Odyssey.Data;
 
 namespace Mobalyz.Data
 {
     public class DataRepository : IDataRepository
     {
         public readonly StoreContext _context;
+        public readonly DataContext _dataContext;
         public readonly IMapper _mapper;
-        public DataRepository(StoreContext context, IMapper mapper)
+        public DataRepository(StoreContext context, IMapper mapper, DataContext dataContext)
         {
-            this._context = context;
-            this._mapper = mapper;
+            _context = context;
+            _mapper = mapper;
+            _dataContext = dataContext;
+        }
+
+        public async Task<IEnumerable<PdfTemplate>> GetPdfTemplateList(string UserName)
+        {
+            List<PdfTemplate> PdfTemplateList = new List<PdfTemplate>();
+            try
+            {
+                PdfTemplateList = await _dataContext.PdfTemplate
+                .Where(b => b.UserName.Contains(UserName))
+                .Where(a => a.IsActive == true).OrderBy(p => p.TemplateName).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return PdfTemplateList;
+        }
+
+        public async Task<IEnumerable<HtmlMailTemplate>> GetMailTemplateList(string UserName)
+        {
+            List<HtmlMailTemplate> MailTemplateList = new List<HtmlMailTemplate>();
+            try
+            {
+                MailTemplateList = await _dataContext.HtmlMailTemplate
+                .Where(b => b.UserName == UserName)
+                .Where(a => a.IsActive == true).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return MailTemplateList;
+        }
+
+        public async Task<bool> VerifyTemplateExist(string templateName)
+        {
+            PdfTemplate pdfTemplate;
+            try
+            {
+                pdfTemplate = _dataContext.PdfTemplate
+                .Where(b => b.TemplateName == templateName)
+                .Where(a => a.IsActive == true).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return pdfTemplate == null ? false : true;
+        }
+
+        public async Task<PdfTemplate> GetPdfTemplateById(int templateId)
+        {
+            PdfTemplate pdfTemplate = new PdfTemplate();
+            try
+            {
+                pdfTemplate = _dataContext.PdfTemplate
+                .Where(b => b.Id == templateId).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return pdfTemplate;
+        }
+        public async Task<HtmlMailTemplate> GetMailTemplateById(int templateId)
+        {
+            HtmlMailTemplate mailTemplate = new HtmlMailTemplate();
+            try
+            {
+                mailTemplate = _dataContext.HtmlMailTemplate
+                .Where(b => b.Id == templateId).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return mailTemplate;
         }
 
         public async Task<bool> GetExistsAsync<TEntity>(Expression<Func<TEntity, bool>> filter = null, bool activeOnly = true)
