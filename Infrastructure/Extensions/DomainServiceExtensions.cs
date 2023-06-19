@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Core.Hosting;
 using Core.Security;
 using Data.Networking;
 using Mobalyz.Odyssey;
@@ -24,8 +23,8 @@ namespace Data.Extensions
             services.Configure<SecuritySettings>(config.GetSection("Security"));
             SecuritySettingsAccessor.Bind(config);
 
-            services.Configure<StorageSettings>(config.GetSection("Data:Storage"));
-            StorageSettingsAccessor.Bind(config);
+            //services.Configure<StorageSettings>(config.GetSection("Data:Storage"));
+            //StorageSettingsAccessor.Bind(config);
 
             return services;
         }

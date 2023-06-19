@@ -11,9 +11,9 @@ namespace Mobalyz.Data
     public class DataRepository : IDataRepository
     {
         public readonly StoreContext _context;
-        public readonly DataContext _dataContext;
+        public readonly OdysseyContext _dataContext;
         public readonly IMapper _mapper;
-        public DataRepository(StoreContext context, IMapper mapper, DataContext dataContext)
+        public DataRepository(StoreContext context, IMapper mapper, OdysseyContext dataContext)
         {
             _context = context;
             _mapper = mapper;

@@ -1,4 +1,3 @@
-using Host.Services;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Mobalyz.Odyssey.Providers.Core;
 using Mobalyz.Odyssey.Resources.Interfaces;
@@ -11,7 +10,6 @@ namespace API.Domain
         public static IServiceCollection AddProviderServices(this IServiceCollection services,
             IConfiguration config)
         {
-            services.TryAddTransient<ITokenService, TokenService>();
             services.TryAddTransient<IAccountProvider, AccountProvider>();
             services.TryAddTransient<IPdfCreationProvider, PdfProvider>();
             services.TryAddTransient<ITemplateProvider, TemplateProvider>();

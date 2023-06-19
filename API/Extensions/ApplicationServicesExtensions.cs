@@ -19,9 +19,15 @@ namespace API.Extensions
             IConfiguration config)
         {
             services.AddSingleton<IResponseCacheService, ResponseCacheService>();
+            services.AddMemoryCache();
             services.AddDbContext<StoreContext>(options =>
             {
                 options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            });
+            var a = config.GetConnectionString("DataConnection");
+            services.AddDbContext<OdysseyContext>(options =>
+            {
+                options.UseSqlServer(config.GetConnectionString("OdysseyConnection"));
             });
             services.AddSingleton<IConnectionMultiplexer>(c => 
             {

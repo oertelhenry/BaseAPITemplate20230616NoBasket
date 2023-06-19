@@ -3,14 +3,14 @@ using Domain.Odyssey.Entities.Documents;
 using Core.Entities.Database;
 using Infrastructure.Data.Dtos;
 
-namespace Mobalyz.Odyssey.Data
+namespace Infrastructue.Data
 {
-    public class DataContext : DbContext
+    public class OdysseyContext : DbContext
     {
-        public DataContext(DbContextOptions options) : base(options)
+        public OdysseyContext(DbContextOptions<OdysseyContext> options) : base(options)
         {
         }
- 
+
         public DbSet<PdfTemplate> PdfTemplate { get; set; }
         public DbSet<HtmlMailTemplate> HtmlMailTemplate { get; set; }
 
