@@ -20,7 +20,6 @@
     <Folder Include="Data\Migrations\" />
     <Folder Include="Data\Migrations\Identity\" />
     <Folder Include="Data\Migrations\Store\" />
-    <Folder Include="Data\NewFolder\" />
   </ItemGroup>
 
   <PropertyGroup>

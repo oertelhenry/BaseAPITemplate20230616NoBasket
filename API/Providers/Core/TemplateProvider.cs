@@ -5,7 +5,6 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Mobalyz.Data;
 using Mobalyz.Domain.Odyssey.Models;
-//using Syncfusion.Pdf.Graphics;
 
 namespace Mobalyz.Odyssey.Resources.Provider
 {

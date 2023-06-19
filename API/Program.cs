@@ -39,12 +39,12 @@ app.UseStatusCodePagesWithReExecute("/errors/{0}");
 app.UseSwaggerDocumentation();
 
 app.UseStaticFiles();
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "Content")),
-    RequestPath = "/Content"
-});
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider = new PhysicalFileProvider(
+//        Path.Combine(Directory.GetCurrentDirectory(), "Content")),
+//    RequestPath = "/Content"
+//});
 
 app.UseCors("CorsPolicy");
 
